@@ -1,0 +1,19 @@
+[project]
+name = "data-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Nirbhay0007", email = "109225815+Nirbhay0007@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic>=2.13.5",
+]
+
+[project.scripts]
+data-agent = "data_agent:main"
+
+[build-system]
+requires = ["uv_build>=0.12.18,<0.13.0"]
+build-backend = "uv_build"
