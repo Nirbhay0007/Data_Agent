@@ -1,11 +1,9 @@
 
 
 
-# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 
 
-# pyrefly: ignore [missing-import]
 from langchain_groq import ChatGroq
 
 load_dotenv()
@@ -21,6 +19,6 @@ def pick_llm(level: str):
         raise ValueError(f"Invalid level: {level}. Choose from Beginner, Intermediate, or Advanced.")
  
 
-# llm_obj = pick_llm(level="high")
-# response = llm_obj.invoke("Hello, who are you?")
-# print(response.content)
+llm_obj = pick_llm(level="high")
+response = llm_obj.invoke("Hello, who are you?")
+print(response.content)
