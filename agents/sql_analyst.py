@@ -56,9 +56,12 @@ def prompt_querry_context(state : AgentSchema) -> AgentSchema:
           llm = pick_llm("medium")
 
           response = llm.invoke(prompt)
-          state.generated_sql_querry = generated_sql_querry 
+          state.generated_sql_querry = response.content 
           return state
 
-          
 
+# Is safe node 
           
+def is_safe_sql(state:AgentSchema) -> AgentSchema:
+
+          sql_query = state.generated_sql_querry
