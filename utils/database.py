@@ -1,3 +1,5 @@
+
+from langsmith._openapi_client.types import run_select_field
 import psycopg2
 
 
@@ -72,7 +74,21 @@ class DatabaseUtils:
             if cursor:
                 cursor.close()
 
-
+    def execute_query(self,query):
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute(query)
+            result = cursor.fetchall()
+            self.connection.commit()
+            return str(result)
+        except Exception as e:
+            return f"Error: {e}"
+        finally:
+            if cursor:
+                cursor.close()
+            if self.connection:
+                self.connection.close()
+                
     
 
 
