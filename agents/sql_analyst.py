@@ -1,10 +1,7 @@
-
-from langchain_core.messages import AIMessage
-
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
-from langchain_core.messages import HumanMessage,AIMessage
+from langchain_core.messages import HumanMessage, AIMessage
 from utils.database import DatabaseUtils
 from utils.llm_pick import pick_llm
 from models.schema import AgentSchema,JudgeSchema
@@ -219,16 +216,45 @@ sql_analyst = sql_agent_graph.compile()
     # with open("sql_analyst_graph.png", "wb") as f:
     #     f.write(img.data)
     
-if __name__ == "__main__":
-    input_schema = {
+# if __name__ == "__main__":
+#     input_schema = {
+#         "user_question": "what are the different types of payments methods we have in our database ?"
+#     }
+    
+#     result = sql_analyst.invoke(input_schema)
+    
+#     print("\n" + "="*50)
+#     print("FINAL ANSWER:")
+#     print("="*50)
+#     print(result["final_answer"])
+
+input_schema = {
         "user_question": "what are the different types of payments methods we have in our database ?"
-    }
-    
-    result = sql_analyst.invoke(input_schema)
-    
-    print("\n" + "="*50)
-    print("FINAL ANSWER:")
-    print("="*50)
-    print(result["final_answer"])
+}
 
+# executing the grpah
 
+sql_analyst_response = sql_analyst.invoke(input_schema)
+print("===========================================================================================")
+print("\n")
+print("Messages: ")
+print(sql_analyst_response['messages'])
+print("===========================================================================================")
+print("\n")
+print("Generated SQL Query: ")
+print(sql_analyst_response['generated_sql_query'])
+print("===========================================================================================")
+print("\n")
+print("SQL Query Execution Result: ")
+print(sql_analyst_response['sql_query_execution_result'])
+print("===========================================================================================")
+print("\n")
+print("Prompt Query Context: ")
+print(sql_analyst_response['prompt_query_context'])
+print("\n")
+print("Curated Question: ")
+print(sql_analyst_response['curated_ques'])
+print("===========================================================================================")
+print("\n")
+print("Final Answer: ")
+print(sql_analyst_response['final_answer'])

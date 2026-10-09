@@ -74,7 +74,10 @@ class DatabaseUtils:
             if cursor:
                 cursor.close()
 
-    def execute_query(self,query):
+    def execute_query(self, query):
+        if not self.connection:
+            return "Error: No database connection available"
+        cursor = None
         try:
             cursor = self.connection.cursor()
             cursor.execute(query)
